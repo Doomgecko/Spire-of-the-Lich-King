@@ -22,3 +22,13 @@ body{
 .monsterStatus h1 {
     font-size: 20px;
 }
+
+#quickMenu {
+    margin: 5px;
+    padding: 5px;
+    background-color: antiquewhite;
+}
+
+#quickMenu h1 {
+    font-size: 20px;
+}

@@ -35,20 +35,28 @@ let view = {
         mstrName.innerHTML = monster.monsterName;
         mstrHealth.innerHTML = "Health: " + monster.monsterHP + "/" + monster.mstrHPMax;
         mstrTele.innerHTML = monster.mstrTelegraph;
-    },
-    updateMenu(){
-
     }
 }
 
 let combatMenu = {
+    menu: document.getElementById("quickMenu"),
     attackOption(){
-        let menu = document.getElementById("quickMenu");
-        menu.innerHTML = "<br><form><button id='slashAttack'>Slash</button><p>Cost: 2 Stamina</p><br>" +
-            "<button id='cleaveAttack'>Cleave</button><p>A heavy attack. Cost: 3 Stamina </p><br></form>";
+       combatMenu.menu.innerHTML = "<H1>Attacks</H1>" +
+            "<form><button id='slashAttack' type='button'>Slash</button><p>Cost: 2 Stamina</p>" +
+            "<button id='cleaveAttack' type='button'>Cleave</button><p>A heavy attack. Cost: 3 Stamina </p></form>";
     },
-    defendOption(){},
-    spellOption(){}
+    defendOption(){
+        combatMenu.menu.innerHTML = "<H1>Defense</H1>" +
+            "<form><button id='blockDefense' type='button'>Block</button><p>Cost: 4 Stamina</p>" +
+            "<button id='dodgeDefense' type='button'>Dodge</button><p>A quick manuever. Cost 2 Stamina</p></form>"
+    },
+    spellOption(){
+        combatMenu.menu.innerHTML = "<H1>Spells</H1>" +
+            "<form><button id='fireballSpell' type='button'>Fireball</button><p>Unleash a deadly ball of fire. " +
+            " Cost: 3 Stamina, 5 Mana</p>" +
+            "<button id='lightning' type='button'>Lightning Bolt</button><p>Either deals high damage or fizzles out." +
+            " Cost: 5 Stamina, 5 Mana<p/></form>"
+    }
 
 }
 
