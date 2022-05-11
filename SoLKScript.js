@@ -12,8 +12,8 @@ let setup = {
         let spellButton = document.getElementById("spellButton");
         let defendButton = document.getElementById("defendButton");
         attackButton.onclick = combatMenu.attackOption;
-        spellButton.onclick  = combatMenu.spellOption();
-        defendButton.onclick = combatMenu.defendOption();
+        spellButton.onclick  = combatMenu.spellOption;
+        defendButton.onclick = combatMenu.defendOption;
     }
 }
 
@@ -44,8 +44,8 @@ let view = {
 let combatMenu = {
     attackOption(){
         let menu = document.getElementById("quickMenu");
-        menu.innerHTML = "<form><button id='slashAttack'>Slash</button><p>Cost: 2 Stamina</p><br>" +
-            "<button id='cleaveAttack'>Cleae</button><p>A heavy attack. Cost: 3 Stamina </p>"
+        menu.innerHTML = "<br><form><button id='slashAttack'>Slash</button><p>Cost: 2 Stamina</p><br>" +
+            "<button id='cleaveAttack'>Cleave</button><p>A heavy attack. Cost: 3 Stamina </p><br></form>";
     },
     defendOption(){},
     spellOption(){}
