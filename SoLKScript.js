@@ -29,4 +29,5 @@ let monster = {
     monsterActions: ["Attack", "SPAttack", "Defend", "Warcry"]
 }
 
-view.updatePlayer();
+
+
