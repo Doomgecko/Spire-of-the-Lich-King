@@ -1,3 +1,22 @@
+let setup = {
+    setupPlayer(){
+        player.playerHP = player.plrHPMax;
+        player.playerMP = player.plrMPMax;
+        player.playerSP = player.plrSPMax;
+    },
+    setupMonster(){
+        monster.monsterHP = monster.mstrHPMax;
+    },
+    setupMenu(){
+        let attackButton = document.getElementById("attackButton");
+        let spellButton = document.getElementById("spellButton");
+        let defendButton = document.getElementById("defendButton");
+        attackButton.onclick = combatMenu.attackOption;
+        spellButton.onclick  = combatMenu.spellOption();
+        defendButton.onclick = combatMenu.defendOption();
+    }
+}
+
 let view = {
     updatePlayer(){
        let plrName = document.getElementById("playerName");
@@ -22,6 +41,17 @@ let view = {
     }
 }
 
+let combatMenu = {
+    attackOption(){
+        let menu = document.getElementById("quickMenu");
+        menu.innerHTML = "<form><button id='slashAttack'>Slash</button><p>Cost: 2 Stamina</p><br>" +
+            "<button id='cleaveAttack'>Cleae</button><p>A heavy attack. Cost: 3 Stamina </p>"
+    },
+    defendOption(){},
+    spellOption(){}
+
+}
+
 let player = {
     playerName: "Gygax",
     playerHP: 0,
@@ -29,16 +59,24 @@ let player = {
     playerMP: 0,
     plrMPMax: 20,
     playerSP: 0,
-    plrSPMax: 5
+    plrSPMax: 5,
+    playerAttack: 0,
+    playerBlock: 0
 }
 
 let monster = {
     monsterName: "Minotaur",
     monsterHP: 0,
     mstrHPMax: 100,
-    mstrTelegraph: "Minotaur is ready to fight",
-    monsterActions: ["Attack", "SPAttack", "Defend", "Warcry"]
+    monsterAttack: 0,
+    monsterBlock: 0,
+    monsterActions: ["Attack", "SPAttack", "Defend", "Warcry"],
+    mstrTelegraph: "Minotaur is ready to fight"
+
 }
 
+setup.setupPlayer();
+setup.setupMonster();
+setup.setupMenu()
 view.updatePlayer();
 view.updateMonster();
