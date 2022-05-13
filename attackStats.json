@@ -1,0 +1,11 @@
+{
+  "Slash": {
+	"damageMod": 5,
+	"staminaMod": 2
+  },
+  "Thrust": {
+	"damageMod": 10,
+	"staminaMod": 3
+  }
+}
+  
