@@ -1,3 +1,9 @@
+//THE SPIRE OF THE LICH KING V2.0
+//--Notes on Version 2--
+//This version uses a different UI based on one menu rather than submenus.
+//The goal is to make the overall UX more smooth and attach the player to the game.
+//Other than that slight tweaks will be made to make the code run more smoothly
+//and errors from the last version will be fixed.
 let attacksObj = {};
 let setup = {
     setupPlayer(){
@@ -17,21 +23,18 @@ let setup = {
         monster.monsterHP = monster.mstrHPMax;
     },
     setupMenu(){
-        document.getElementById("attackButton").onclick = combatMenu.attackOption;
-        document.getElementById("spellButton").onclick  = combatMenu.spellOption;
-        document.getElementById("defendButton").onclick = combatMenu.defendOption;
         document.getElementById("endTurn").onclick = upkeep.processTurn;
     }
 }
 
 let view = {
     updatePlayer(){
-       document.getElementById("playerName").innerHTML = player.playerName;
-       document.getElementById("playerHP").innerHTML = "Health: " + player.playerHP + "/" + player.plrHPMax;
-       document.getElementById("playerMP").innerHTML = "Mana: " + player.playerMP + "/" + player.plrMPMax;
-       document.getElementById("playerSP").innerHTML = "Stamina: " + player.playerSP + "/" + player.plrSPMax;
-       document.getElementById("playerDamage").innerHTML = "Damage <" + player.playerAttack + ">";
-       document.getElementById("playerBlock").innerHTML = "Defense (" + player.playerBlock + ")";
+        document.getElementById("playerName").innerHTML = player.playerName;
+        document.getElementById("playerHP").innerHTML = "Health: " + player.playerHP + "/" + player.plrHPMax;
+        document.getElementById("playerMP").innerHTML = "Mana: " + player.playerMP + "/" + player.plrMPMax;
+        document.getElementById("playerSP").innerHTML = "Stamina: " + player.playerSP + "/" + player.plrSPMax;
+        document.getElementById("playerDamage").innerHTML = "Damage <" + player.playerAttack + ">";
+        document.getElementById("playerBlock").innerHTML = "Defense (" + player.playerBlock + ")";
     },
     updateMonster(){
         let mstrName = document.getElementById("monsterName");
@@ -44,34 +47,33 @@ let view = {
 }
 
 let combatMenu = {
-    menu: document.getElementById("quickMenu"),
-    attackOption(){
-       combatMenu.menu.innerHTML = "<H1>Attacks</H1>" +
-            "<form><button id='slashAttack' type='button'>Slash</button><p>Cost: 2 Stamina</p>" +
+    attackMenu: document.getElementById("attackMenu"),
+    defenseMenu: document.getElementById("defenseMenu"),
+    spellMenu: document.getElementById("spellMenu"),
+    generateAttacks(){
+        combatMenu.attackMenu.innerHTML +=  "<form><button id='slashAttack' type='button'>Slash</button><p>Cost: 2 Stamina</p>" +
             "<button id='cleaveAttack' type='button'>Cleave</button><p>A heavy attack. Cost: 3 Stamina </p></form>";
-            document.getElementById("slashAttack").onclick = player.attack;
-            document.getElementById("cleaveAttack").onclick = player.SPAttack;
+        document.getElementById("slashAttack").onclick = player.attack;
+        document.getElementById("cleaveAttack").onclick = player.SPAttack;
     },
-    defendOption(){
-        combatMenu.menu.innerHTML = "<H1>Defense</H1>" +
-            "<form><button id='blockDefense' type='button'>Block</button><p>Cost: 4 Stamina</p>" +
+    generateDefense(){
+        combatMenu.defenseMenu.innerHTML +=  "<form><button id='blockDefense' type='button'>Block</button><p>Cost: 4 Stamina</p>" +
             "<button id='dodgeDefense' type='button'>Dodge</button><p>A quick manuever. Cost 2 Stamina</p></form>";
-            document.getElementById("blockDefense").onclick = player.defend;
-            document.getElementById("dodgeDefense").onclick = player.dodge;
+        document.getElementById("blockDefense").onclick = player.defend;
+        document.getElementById("dodgeDefense").onclick = player.dodge;
     },
-    spellOption(){
-        combatMenu.menu.innerHTML = "<H1>Spells</H1>" +
-            "<form><button id='fireballSpell' type='button'>Fireball</button><p>Unleash a deadly ball of fire. " +
+    generateSpells(){
+        combatMenu.spellMenu.innerHTML += "<form><button id='fireballSpell' type='button'>Fireball</button><p>Unleash a deadly ball of fire. " +
             " Cost: 3 Stamina, 5 Mana</p>" +
             "<button id='lightningSpell' type='button'>Lightning Bolt</button><p>Either deals high damage or fizzles out." +
             " Cost: 5 Stamina, 5 Mana</p>" +
             "<button id='wardSpell' type='button'>Quick Ward</button><p>Creates a quick shield. " +
-            "Cost: 1 Stamina, 2 Mana</p></form>"
+            "Cost: 1 Stamina, 2 Mana</p></form>";
         document.getElementById("fireballSpell").onclick = player.fireball;
         document.getElementById("lightningSpell").onclick = player.lightningBolt;
         document.getElementById("wardSpell").onclick = player.quickWard;
-
     }
+
 
 }
 
@@ -86,14 +88,16 @@ let player = {
     playerAttack: 0,
     playerBlock: 0,
     attack(){
-        if (player.playerSP >= 2) {
-            player.playerAttack += 5;
-            player.playerSP -= 2;
-            view.updatePlayer();
-            document.getElementById("errorReport").innerHTML = "You prepare an attack. (Damage +5)"
-        }else {
-            document.getElementById("errorReport").innerHTML = "You don't have enough Stamina."
-        }
+            if (player.playerSP >= 2) {
+                player.playerAttack += 5;
+                player.playerSP -= 2;
+                view.updatePlayer();
+                document.getElementById("errorReport").innerHTML = "You prepare an attack. (Damage +5)";
+
+            } else {
+                document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
+            }
+
     },
     SPAttack(){
         if (player.playerSP >= 3) {
@@ -205,22 +209,22 @@ let upkeep = {
 
     },
     monsterAction(){
-       let actionChoice = 0;
-       actionChoice = Math.floor(Math.random()*2 +1);
-       if(actionChoice === 1){
-           monster.monsterAttack = 10;
-           monster.monsterBlock = 5;
-           monster.mstrTelegraph = "Minotaur is preparing to charge!"
-       }else if (actionChoice === 2){
-           monster.monsterAttack = 25;
-           monster.monsterBlock = 0;
-           monster.mstrTelegraph = "Minotaur is readying a mighty strike!"
-       }else if (actionChoice === 3){
-           monster.monsterAttack = 5;
-           monster.monsterBlock = 25;
-           monster.mstrTelegraph = "Minotaur is standing resolute!"
-       }
-       view.updateMonster();
+        let actionChoice = 0;
+        actionChoice = Math.floor(Math.random()*2 +1);
+        if(actionChoice === 1){
+            monster.monsterAttack = 10;
+            monster.monsterBlock = 5;
+            monster.mstrTelegraph = "Minotaur is preparing to charge!"
+        }else if (actionChoice === 2){
+            monster.monsterAttack = 25;
+            monster.monsterBlock = 0;
+            monster.mstrTelegraph = "Minotaur is readying a mighty strike!"
+        }else if (actionChoice === 3){
+            monster.monsterAttack = 5;
+            monster.monsterBlock = 25;
+            monster.mstrTelegraph = "Minotaur is standing resolute!"
+        }
+        view.updateMonster();
     }
 }
 
@@ -229,3 +233,6 @@ setup.setupMonster();
 setup.setupMenu()
 view.updatePlayer();
 view.updateMonster();
+combatMenu.generateAttacks();
+combatMenu.generateDefense();
+combatMenu.generateSpells();
