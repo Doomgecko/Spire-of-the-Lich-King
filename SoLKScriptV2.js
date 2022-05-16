@@ -188,7 +188,7 @@ let upkeep = {
         if (monster.monsterHP <= 1){
             document.getElementById("errorReport").innerHTML = "You have defeated the minotaur! Congrats!";
             monster.monsterName = "Dead";
-            monster.monsterHP = "";
+            monster.monsterHP = "x/";
             monster.mstrTelegraph = "The Minotaur lies dead."
             view.updateMonster();
         }else{
@@ -210,7 +210,7 @@ let upkeep = {
     },
     monsterAction(){
         let actionChoice = 0;
-        actionChoice = Math.floor(Math.random()*2 +1);
+        actionChoice = Math.floor(Math.random()*3);
         if(actionChoice === 1){
             monster.monsterAttack = 10;
             monster.monsterBlock = 5;

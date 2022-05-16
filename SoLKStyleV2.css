@@ -1,0 +1,22 @@
+body{
+    background-color: bisque;
+    font-family: "Times New Roman", "serif";
+    font-size: calc(4px + .5vw);
+}
+
+.playerStatus {
+    margin: 5px;
+    padding: 5px;
+    background-color: antiquewhite;
+    position: relative;
+}
+.monsterStatus {
+    margin: 5px;
+    padding: 5px;
+    background-color: antiquewhite;
+    position: relative;
+    left: 50vw;
+}
+h1 {
+    font-size: calc(6px + 1vw);
+}
