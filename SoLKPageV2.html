@@ -7,26 +7,28 @@
 </head>
 <body>
 <script src = "SoLKScriptV2.js" defer></script>
-<div class = "playerStatus">
-    <h1 id = "playerName">playerName</h1>
-    <p id = "playerHP"> Health:</p>
-    <p id = "playerMP"> Mana:</p>
-    <p id = "playerSP"> Stamina: </p>
-    <p id = "playerDamage"> Damage <></p>
-    <p id = "playerBlock"> Defense ()</p>
-    <br>
-    <p id = "errorReport"></p>
+<div class = "col">
+    <div class = "playerStatus row">
+        <h1 id = "playerName">playerName</h1>
+        <p id = "playerHP"> Health:</p>
+        <p id = "playerMP"> Mana:</p>
+        <p id = "playerSP"> Stamina: </p>
+        <p id = "playerDamage"> Damage <></p>
+        <p id = "playerBlock"> Defense ()</p>
+        <br>
+        <p id = "errorReport"></p>
+    </div>
+    <div class = "monsterStatus row">
+        <h1 id = "monsterName">monsterName</h1>
+        <p id = "monsterHP"> Health:</p>
+        <p id = "monsterTelegraph"></p>
+    </div>
 </div>
-<div class = "monsterStatus">
-    <h1 id = "monsterName">monsterName</h1>
-    <p id = "monsterHP"> Health:</p>
-    <p id = "monsterTelegraph"></p>
-</div>
-<div id="combatMenu">
-    <div id="attackMenu"><h1>Attacks</h1></div>
-    <div id="defenseMenu"><h1>Defense</h1></div>
-    <div id="spellMenu"><h1>Spells</h1></div>
-    <button id = "endTurn" type = "button">End Turn</button>
+<div class ="combatMenu col">
+    <div class="attackMenu row" id="attackMenu"><h1>Attacks</h1></div>
+    <div class="defenseMenu row" id="defenseMenu"><h1>Defense</h1></div>
+    <div class="spellMenu row" id="spellMenu"><h1>Spells</h1></div>
+    <button id = "endTurn row" type = "button">End Turn</button>
 </div>
 </body>
 </html>

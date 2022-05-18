@@ -9,14 +9,51 @@ body{
     padding: 5px;
     background-color: antiquewhite;
     position: relative;
+    width: 40%;
+    float: left;
+
 }
+.row{
+    display: flex;
+}
+.col{
+    flex: 1;
+    padding: 1em;
+}
+
 .monsterStatus {
     margin: 5px;
     padding: 5px;
     background-color: antiquewhite;
     position: relative;
-    left: 50vw;
+    float: right;
+    width: 40%;
 }
 h1 {
     font-size: calc(6px + 1vw);
+}
+#endTurn {
+    position: fixed;
+    bottom: 1vw;
+    left: 50vw;
+}
+div{
+
+}
+
+.combatMenu {
+    clear: both;
+
+}
+
+.attackMenu {
+
+}
+
+.defenseMenu{
+
+}
+
+.spellMenu{
+
 }
