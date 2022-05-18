@@ -5,11 +5,9 @@ body{
 }
 
 .playerStatus {
-    margin: 5px;
-    padding: 5px;
     background-color: antiquewhite;
     position: relative;
-    width: 40%;
+    width: 45%;
     float: left;
 
 }
@@ -22,12 +20,10 @@ body{
 }
 
 .monsterStatus {
-    margin: 5px;
-    padding: 5px;
     background-color: antiquewhite;
     position: relative;
     float: right;
-    width: 40%;
+    width: 45%;
 }
 h1 {
     font-size: calc(6px + 1vw);
@@ -35,7 +31,7 @@ h1 {
 #endTurn {
     position: fixed;
     bottom: 1vw;
-    left: 50vw;
+    left: 50%;
 }
 div{
 
@@ -43,17 +39,27 @@ div{
 
 .combatMenu {
     clear: both;
-
 }
 
 .attackMenu {
+    float: left;
+    border: solid;
+    width: 25%;
+    margin: 5%;
 
 }
 
 .defenseMenu{
+    width: 25%;
+    margin: 5%;
+    border: solid;
 
 }
 
 .spellMenu{
+    float: right;
+    width: 25%;
+    margin: 5%;
+    border: solid;
 
 }
