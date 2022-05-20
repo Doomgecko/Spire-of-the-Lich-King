@@ -19,11 +19,16 @@
 }
 
 .col {
-    background-color: antiquewhite;
+    background-color: rgba(0, 102, 51, 70%);
+}
+
+button{
+    font-family: "Times New Roman", "serif";
+    font-weight: bold;
 }
 
 body{
-    background-color: bisque;
+    background-image: url("The Spire.jpg");
     font-family: "Times New Roman", "serif";
     font-size: calc(4px + .5vw);
 }

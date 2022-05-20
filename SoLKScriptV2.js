@@ -186,7 +186,7 @@ let monster = {
 let upkeep = {
     checkWin(){ document.getElementById("errorReport").innerHTML = "You have defeated the minotaur! Congrats!";
         monster.monsterName = "Dead";
-        monster.monsterHP = "x/";
+        monster.monsterHP = "0";
         monster.mstrTelegraph = "The Minotaur lies dead."
         view.updateMonster();},
     processTurn(){
@@ -212,18 +212,18 @@ let upkeep = {
     monsterAction(){
         let actionChoice = 0;
         actionChoice = Math.floor(Math.random()*3);
-        if(actionChoice === 1){
+        if(actionChoice === 0){
             monster.monsterAttack = 10;
             monster.monsterBlock = 5;
-            monster.mstrTelegraph = "Minotaur is preparing to charge!"
-        }else if (actionChoice === 2){
+            monster.mstrTelegraph = "Minotaur is preparing to charge!";
+        }else if (actionChoice === 1){
             monster.monsterAttack = 25;
             monster.monsterBlock = 0;
-            monster.mstrTelegraph = "Minotaur is readying a mighty strike!"
-        }else if (actionChoice === 3){
+            monster.mstrTelegraph = "Minotaur is readying a mighty strike!";
+        }else if (actionChoice === 2){
             monster.monsterAttack = 5;
             monster.monsterBlock = 25;
-            monster.mstrTelegraph = "Minotaur is standing resolute!"
+            monster.mstrTelegraph = "Minotaur is standing resolute!";
         }
         view.updateMonster();
         if(monster.monsterHP < 1){
