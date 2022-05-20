@@ -1,3 +1,27 @@
+*{box-sizing: border-box}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+}
+.col:nth-child(-n + 5) {
+    grid-column: span 2;
+}
+
+.col:nth-child(1) {
+    grid-row-start: 1;
+    grid-column: 1 / span 3;
+}
+
+.col:nth-child(2) {
+    grid-row-start: 1;
+    grid-column: 4 / span 6;
+}
+
+.col {
+    background-color: antiquewhite;
+}
+
 body{
     background-color: bisque;
     font-family: "Times New Roman", "serif";
@@ -5,25 +29,12 @@ body{
 }
 
 .playerStatus {
-    background-color: antiquewhite;
-    position: relative;
-    width: 45%;
-    float: left;
 
 }
-.row{
-    display: flex;
-}
-.col{
-    flex: 1;
-    padding: 1em;
-}
+
 
 .monsterStatus {
-    background-color: antiquewhite;
-    position: relative;
-    float: right;
-    width: 45%;
+
 }
 h1 {
     font-size: calc(6px + 1vw);
@@ -37,29 +48,3 @@ div{
 
 }
 
-.combatMenu {
-    clear: both;
-}
-
-.attackMenu {
-    float: left;
-    border: solid;
-    width: 25%;
-    margin: 5%;
-
-}
-
-.defenseMenu{
-    width: 25%;
-    margin: 5%;
-    border: solid;
-
-}
-
-.spellMenu{
-    float: right;
-    width: 25%;
-    margin: 5%;
-    border: solid;
-
-}

@@ -184,13 +184,14 @@ let monster = {
 }
 
 let upkeep = {
+    checkWin(){ document.getElementById("errorReport").innerHTML = "You have defeated the minotaur! Congrats!";
+        monster.monsterName = "Dead";
+        monster.monsterHP = "x/";
+        monster.mstrTelegraph = "The Minotaur lies dead."
+        view.updateMonster();},
     processTurn(){
-        if (monster.monsterHP <= 1){
-            document.getElementById("errorReport").innerHTML = "You have defeated the minotaur! Congrats!";
-            monster.monsterName = "Dead";
-            monster.monsterHP = "x/";
-            monster.mstrTelegraph = "The Minotaur lies dead."
-            view.updateMonster();
+        if (monster.monsterHP < 1){
+            upkeep.checkWin();
         }else{
             if (player.playerAttack > monster.monsterBlock) {
                 monster.monsterHP -= (player.playerAttack - monster.monsterBlock);
@@ -225,6 +226,9 @@ let upkeep = {
             monster.mstrTelegraph = "Minotaur is standing resolute!"
         }
         view.updateMonster();
+        if(monster.monsterHP < 1){
+            upkeep.checkWin();
+        }
     }
 }
 
