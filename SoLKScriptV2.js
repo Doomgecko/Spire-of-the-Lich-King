@@ -184,9 +184,17 @@ let monster = {
 }
 
 let upkeep = {
-    checkWin(){ document.getElementById("errorReport").innerHTML = "You have defeated the minotaur! Congrats!";
+    checkLoss(){
+        document.getElementById("errorReport").innerHTML = "You Died...";
+        document.getElementById("restart").innerHTML = "<button id='tryAgain' type='button'>Try Again?</button>";
+        document.getElementById("endTurn").innerHTML = "<div></div>"
+        player.playerHP = 0;
+        view.updatePlayer();
+    },
+    checkWin(){
+        document.getElementById("errorReport").innerHTML = "You have defeated the minotaur! Congrats!";
         monster.monsterName = "Dead";
-        monster.monsterHP = "0";
+        monster.monsterHP = 0;
         monster.mstrTelegraph = "The Minotaur lies dead."
         view.updateMonster();},
     processTurn(){
@@ -228,6 +236,9 @@ let upkeep = {
         view.updateMonster();
         if(monster.monsterHP < 1){
             upkeep.checkWin();
+        }
+        if(player.playerHP < 1){
+            upkeep.checkLoss();
         }
     }
 }

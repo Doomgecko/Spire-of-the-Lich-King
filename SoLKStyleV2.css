@@ -49,6 +49,12 @@ h1 {
     bottom: 1vw;
     left: 50%;
 }
+
+#tryAgain {
+    position: fixed;
+    bottom: 1vw;
+    left: 50%;
+}
 div{
 
 }
