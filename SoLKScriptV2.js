@@ -57,13 +57,13 @@ let combatMenu = {
         document.getElementById("cleaveAttack").onclick = player.SPAttack;
     },
     generateDefense(){
-        combatMenu.defenseMenu.innerHTML +=  "<form><button id='blockDefense' type='button'>Block</button><p>Cost: 4 Stamina</p>" +
+        combatMenu.defenseMenu.innerHTML +=  "<form><button id='blockDefense' type='button'>Block</button><p>Cost: 3 Stamina</p>" +
             "<button id='dodgeDefense' type='button'>Dodge</button><p>A quick manuever. Cost 2 Stamina</p></form>";
         document.getElementById("blockDefense").onclick = player.defend;
         document.getElementById("dodgeDefense").onclick = player.dodge;
     },
     generateSpells(){
-        combatMenu.spellMenu.innerHTML += "<form><button id='fireballSpell' type='button'>Fireball</button><p>Unleash a deadly ball of fire. " +
+        combatMenu.spellMenu.innerHTML += "<form><button id='fireballSpell' type='button'>Fireball</button><p>Unleash a deadly ball of fire, but take some damage. " +
             " Cost: 3 Stamina, 5 Mana</p>" +
             "<button id='lightningSpell' type='button'>Lightning Bolt</button><p>Either deals high damage or fizzles out." +
             " Cost: 5 Stamina, 5 Mana</p>" +
@@ -85,14 +85,21 @@ let player = {
     plrMPMax: 20,
     playerSP: 0,
     plrSPMax: 5,
+    plrStrength: 6,
+    plrAgility: 6,
+    plrEndurance: 6,
+    plrWit: 6,
+    plrSpirit: 0,
     playerAttack: 0,
     playerBlock: 0,
     attack(){
             if (player.playerSP >= 2) {
-                player.playerAttack += 5;
+                let playerSlash = (Math.floor(Math.random()*5) + 1) + player.plrStrength;
+                player.playerAttack += playerSlash;
                 player.playerSP -= 2;
                 view.updatePlayer();
-                document.getElementById("errorReport").innerHTML = "You prepare an attack. (Damage +5)";
+                document.getElementById("errorReport").innerHTML = "You prepare an attack. (Damage +" +
+                    playerSlash + ")";
 
             } else {
                 document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
@@ -101,61 +108,72 @@ let player = {
     },
     SPAttack(){
         if (player.playerSP >= 3) {
-            player.playerAttack += 15;
+            let playerCleave = (Math.floor(Math.random()*11) + 1) + (player.plrStrength * 1.5);
+            player.playerAttack += playerCleave;
             player.playerSP -= 3;
             view.updatePlayer();
-            document.getElementById("errorReport").innerHTML = "You prepare a mighty strike (Damage +15)";
+            document.getElementById("errorReport").innerHTML = "You prepare a mighty strike (Damage +" +
+                playerCleave + ")";
         }else{
             document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
         }
     },
     defend(){
-        if (player.playerSP >= 4) {
-            player.playerBlock += 15;
-            player.playerSP -= 4;
+        if (player.playerSP >= 3) {
+            let playerDefend = (Math.floor(Math.random()*7) + 1) + (Math.floor(Math.random()*7) + 1) + (player.plrEndurance);
+            player.playerBlock += playerDefend;
+            player.playerSP -= 3;
             view.updatePlayer();
-            document.getElementById("errorReport").innerHTML = "You ready your shield. (+20 Block)";
+            document.getElementById("errorReport").innerHTML = "You ready your shield. (Block +" +
+                playerDefend + ")";
         }else{
-            document.getElementById("errorReport").innerHTML = ""
             document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
         }
     },
     dodge(){
         if (player.playerSP >= 2) {
-            player.playerBlock += 10;
+            let playerDodge = (Math.floor(Math.random()*5) + 1) + (player.plrAgility);
+            player.playerBlock += playerDodge;
             player.playerSP -= 2;
             view.updatePlayer();
-            document.getElementById("errorReport").innerHTML = "You prepare to dodge. (+10 Block)";
+            document.getElementById("errorReport").innerHTML = "You prepare to dodge. (Block +" +
+                playerDodge + ")";
         }else{
             document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
         }
     },
     fireball(){
         if (player.playerSP >= 3 && player.playerMP >= 5){
-            player.playerAttack += 25;
+            let playerFireball = (Math.floor(Math.random()*11) + 1) + (Math.floor(Math.random()*11) + 1) +(player.plrWit * 2);
+            let burn = (Math.floor(Math.random()*5) + 1)
+            player.playerAttack += playerFireball;
+            player.playerHP -= burn;
             player.playerSP -= 3;
             player.playerMP -= 5;
             view.updatePlayer();
-            document.getElementById("errorReport").innerHTML = "You begin channeling a fireball! (Damage +25)";
+            document.getElementById("errorReport").innerHTML = "You begin channeling a fireball! (Damage +" +
+                playerFireball + ")";
         }else{
             document.getElementById("errorReport").innerHTML = "You don't have enough resources.";
         }
     },
     lightningBolt(){
         if (player.playerSP >= 5 && player.playerMP >= 5){
-            let bolt = Math.floor(Math.random()*5);
+            let bolt = (Math.floor(Math.random()*9) + 1);
+            let arc = 0
             player.playerSP -= 5;
             player.playerMP -= 5;
-            if (bolt > 2){
-                player.playerAttack += 40;
-                view.updatePlayer();
-                document.getElementById("errorReport").innerHTML = "You channel a mighty bolt! (Damage +40)";
-            }else{
-                player.playerAttack += 1;
-                view.updatePlayer();
-                document.getElementById("errorReport").innerHTML = "The bolt fizzles into a spark. (Damage +1)";
+            while(arc !== 1){
+                arc = Math.floor(Math.random()*5);
+                bolt += (Math.floor(Math.random()*5) + 1);
+                if(bolt >= 50){
+                    bolt = 50;
+                }
             }
-        }else{
+            player.playerAttack += bolt;
+            view.updatePlayer();
+            document.getElementById("errorReport").innerHTML = "You channel a mighty bolt! (Damage +"+ bolt +")";
+            }else{
             document.getElementById("errorReport").innerHTML = "You don't have enough resources.";
         }
     },
@@ -186,7 +204,8 @@ let monster = {
 let upkeep = {
     checkLoss(){
         document.getElementById("errorReport").innerHTML = "You Died...";
-        document.getElementById("restart").innerHTML = "<button id='tryAgain' type='button' onclick='document.location.reload();'>Try Again?</button>";
+        document.getElementById("restart").innerHTML = "<button id='tryAgain' type='button' " +
+            "onclick='document.location.reload();'>" + "Try Again?</button>";
         document.getElementById("endTurn").innerHTML = "<div></div>"
         player.playerHP = 0;
         view.updatePlayer();
