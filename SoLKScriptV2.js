@@ -122,7 +122,7 @@ let player = {
     },
     dodge(){
         if (player.playerSP >= 2) {
-            player.playerBlock += 5;
+            player.playerBlock += 10;
             player.playerSP -= 2;
             view.updatePlayer();
             document.getElementById("errorReport").innerHTML = "You prepare to dodge. (+10 Block)";
@@ -186,7 +186,7 @@ let monster = {
 let upkeep = {
     checkLoss(){
         document.getElementById("errorReport").innerHTML = "You Died...";
-        document.getElementById("restart").innerHTML = "<button id='tryAgain' type='button'>Try Again?</button>";
+        document.getElementById("restart").innerHTML = "<button id='tryAgain' type='button' onclick='document.location.reload();'>Try Again?</button>";
         document.getElementById("endTurn").innerHTML = "<div></div>"
         player.playerHP = 0;
         view.updatePlayer();
