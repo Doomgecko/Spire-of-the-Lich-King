@@ -104,7 +104,7 @@ let player = {
     playerBlock: 0,
     attack(){
             if (player.playerSP >= 2) {
-                let playerSlash = (Math.floor(Math.random()*5) + 1) + player.plrStrength;
+                let playerSlash = rollDice(1, 6) + player.plrStrength;
                 player.playerAttack += playerSlash;
                 player.playerSP -= 2;
                 view.updatePlayer();
@@ -118,7 +118,7 @@ let player = {
     },
     SPAttack(){
         if (player.playerSP >= 3) {
-            let playerCleave = (Math.floor(Math.random()*11) + 1) + (player.plrStrength * 1.5);
+            let playerCleave = rollDice(1, 12) + (player.plrStrength * 1.5);
             player.playerAttack += playerCleave;
             player.playerSP -= 3;
             view.updatePlayer();
