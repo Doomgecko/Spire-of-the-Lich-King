@@ -5,6 +5,16 @@
 //Other than that slight tweaks will be made to make the code run more smoothly
 //and errors from the last version will be fixed.
 let attacksObj = {};
+function randInt(low, high){
+    return Math.floor(Math.random * high) + low;
+}
+function rollDice(count, sides){
+    let rollTotal = 0;
+    for( let i = 0; i < count; i++){
+        rollTotal += randInt(1, sides);
+    }
+    return rollTotal;
+}
 let setup = {
     setupPlayer(){
         player.playerHP = player.plrHPMax;
