@@ -6,7 +6,7 @@
 //and errors from the last version will be fixed.
 let attacksObj = {};
 function randInt(low, high){
-    return Math.floor(Math.random * high) + low;
+    return (Math.floor(Math.random() * high) + low);
 }
 function rollDice(count, sides){
     let rollTotal = 0;
@@ -76,7 +76,7 @@ let combatMenu = {
         combatMenu.spellMenu.innerHTML += "<form><button id='fireballSpell' type='button'>Fireball</button><p>Unleash a deadly ball of fire, but take some damage. " +
             " Cost: 3 Stamina, 5 Mana</p>" +
             "<button id='lightningSpell' type='button'>Lightning Bolt</button><p>Either deals high damage or fizzles out." +
-            " Cost: 5 Stamina, 5 Mana</p>" +
+            " Cost: 5 Stamina, 4 Mana</p>" +
             "<button id='wardSpell' type='button'>Quick Ward</button><p>Creates a quick shield. " +
             "Cost: 1 Stamina, 2 Mana</p></form>";
         document.getElementById("fireballSpell").onclick = player.fireball;
@@ -104,7 +104,7 @@ let player = {
     playerBlock: 0,
     attack(){
             if (player.playerSP >= 2) {
-                let playerSlash = rollDice(1, 6) + player.plrStrength;
+                let playerSlash = rollDice(1,6) + player.plrStrength;
                 player.playerAttack += playerSlash;
                 player.playerSP -= 2;
                 view.updatePlayer();
@@ -130,7 +130,7 @@ let player = {
     },
     defend(){
         if (player.playerSP >= 3) {
-            let playerDefend = (Math.floor(Math.random()*7) + 1) + (Math.floor(Math.random()*7) + 1) + (player.plrEndurance);
+            let playerDefend = rollDice(2,8) + (player.plrEndurance);
             player.playerBlock += playerDefend;
             player.playerSP -= 3;
             view.updatePlayer();
@@ -142,7 +142,7 @@ let player = {
     },
     dodge(){
         if (player.playerSP >= 2) {
-            let playerDodge = (Math.floor(Math.random()*5) + 1) + (player.plrAgility);
+            let playerDodge = rollDice(1,6) + (player.plrAgility);
             player.playerBlock += playerDodge;
             player.playerSP -= 2;
             view.updatePlayer();
@@ -154,8 +154,8 @@ let player = {
     },
     fireball(){
         if (player.playerSP >= 3 && player.playerMP >= 5){
-            let playerFireball = (Math.floor(Math.random()*11) + 1) + (Math.floor(Math.random()*11) + 1) +(player.plrWit * 2);
-            let burn = (Math.floor(Math.random()*5) + 1)
+            let playerFireball = rollDice(1,12) +(player.plrWit * 2);
+            let burn = rollDice(1,6);
             player.playerAttack += playerFireball;
             player.playerHP -= burn;
             player.playerSP -= 3;
@@ -168,14 +168,14 @@ let player = {
         }
     },
     lightningBolt(){
-        if (player.playerSP >= 5 && player.playerMP >= 5){
+        if (player.playerSP >= 5 && player.playerMP >= 4){
             let bolt = (Math.floor(Math.random()*9) + 1);
             let arc = 0
             player.playerSP -= 5;
-            player.playerMP -= 5;
+            player.playerMP -= 4;
             while(arc !== 1){
                 arc = Math.floor(Math.random()*5);
-                bolt += (Math.floor(Math.random()*5) + 1);
+                bolt += rollDice(1,6);
                 if(bolt >= 50){
                     bolt = 50;
                 }
@@ -189,9 +189,10 @@ let player = {
     },
     quickWard(){
         if (player.playerSP >= 1 && player.playerMP >= 2) {
+            let ward = rollDice(1,6) + (player.plrWit);
             player.playerSP -= 1;
             player.playerMP -= 2;
-            player.playerBlock += 5;
+            player.playerBlock += ward;
             view.updatePlayer();
             document.getElementById("errorReport").innerHTML = "You project a magic ward. (+5 Block)";
         }else{
@@ -206,6 +207,8 @@ let monster = {
     mstrHPMax: 100,
     monsterAttack: 20,
     monsterBlock: 10,
+    mstrStrength: 5,
+    mstrEndurance: 5,
     monsterActions: ["Attack", "SPAttack", "Defend", "Warcry"],
     mstrTelegraph: "Minotaur is ready to fight!"
 
@@ -248,19 +251,27 @@ let upkeep = {
     },
     monsterAction(){
         let actionChoice = 0;
-        actionChoice = Math.floor(Math.random()*3);
+        actionChoice = Math.floor(Math.random()*4);
         if(actionChoice === 0){
-            monster.monsterAttack = 10;
-            monster.monsterBlock = 5;
+            monster.monsterAttack += rollDice(1,10) + (monster.mstrStrength);
+            monster.monsterBlock += rollDice (1,4) + (monster.mstrEndurance);
             monster.mstrTelegraph = "Minotaur is preparing to charge!";
         }else if (actionChoice === 1){
-            monster.monsterAttack = 25;
+            monster.monsterAttack = rollDice(2, 12) + (monster.mstrStrength);
             monster.monsterBlock = 0;
             monster.mstrTelegraph = "Minotaur is readying a mighty strike!";
         }else if (actionChoice === 2){
-            monster.monsterAttack = 5;
-            monster.monsterBlock = 25;
+            monster.monsterAttack = rollDice(1,6);
+            monster.monsterBlock = rollDice(1,12) + (monster.mstrEndurance);
             monster.mstrTelegraph = "Minotaur is standing resolute!";
+        }else if (actionChoice === 3){
+            let brutal = Math.floor(Math.random()*2) + 1;
+            if(brutal === 1) {
+                monster.monsterAttack = rollDice(3, 12);
+                monster.monsterBlock = 0;
+                monster.monsterHP -= rollDice(1,6);
+                monster.mstrTelegraph = "Minotaur is preparing a brutal attack!"
+            }
         }
         view.updateMonster();
         if(monster.monsterHP < 1){
