@@ -22,6 +22,45 @@
     background-color: rgba(0, 102, 51, 70%);
 }
 
+#playerHP{
+    background-color: #a10101;
+    color: white;
+    height: 20px;
+    width: 100%;
+}
+
+#plrMaxHP{
+    background-color: grey;
+    height: 20px;
+    width: 50%;
+}
+
+#playerMP{
+    background-color: #2200ff;
+    color: white;
+    height: 20px;
+    width: 100%;
+}
+
+#plrMaxMP{
+    color: grey;
+    height: 20px;
+    width: 40%
+}
+
+#playerSP {
+    background-color: orange;
+    color: white;
+    height: 20px;
+    width: 100%;
+}
+
+#plrMaxSP{
+    color: grey;
+    height: 20px;
+    width: 50%
+}
+
 button{
     font-family: "Times New Roman", "serif";
     font-weight: bold;

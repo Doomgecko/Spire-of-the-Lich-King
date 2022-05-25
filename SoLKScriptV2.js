@@ -41,6 +41,7 @@ let view = {
     updatePlayer(){
         document.getElementById("playerName").innerHTML = player.playerName;
         document.getElementById("playerHP").innerHTML = "Health: " + player.playerHP + "/" + player.plrHPMax;
+        document.getElementById("playerHP").style.width = "" + player.playerHP/2;
         document.getElementById("playerMP").innerHTML = "Mana: " + player.playerMP + "/" + player.plrMPMax;
         document.getElementById("playerSP").innerHTML = "Stamina: " + player.playerSP + "/" + player.plrSPMax;
         document.getElementById("playerDamage").innerHTML = "Damage <" + player.playerAttack + ">";
@@ -262,7 +263,7 @@ let upkeep = {
             monster.mstrTelegraph = "Minotaur is readying a mighty strike!";
         }else if (actionChoice === 2){
             monster.monsterAttack = rollDice(1,6);
-            monster.monsterBlock = rollDice(1,12) + (monster.mstrEndurance);
+            monster.monsterBlock = rollDice(1,12) + (Math.floor(monster.mstrEndurance * 1.5));
             monster.mstrTelegraph = "Minotaur is standing resolute!";
         }else if (actionChoice === 3){
             let brutal = Math.floor(Math.random()*2) + 1;
