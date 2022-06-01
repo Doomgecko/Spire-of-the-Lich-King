@@ -27,6 +27,11 @@ body{
 }
 
 #playerHP{
+    position: absolute;
+
+}
+
+#healthBar{
     background-color: #a10101;
     color: white;
     height: 20px;
@@ -82,7 +87,10 @@ body{
 }
 
 
-.monsterStatus {
+#monsterTelegraph {
+    background-color: #a10101;
+    width: 40%;
+    color: black;
 
 }
 h1 {
