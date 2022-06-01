@@ -5,6 +5,7 @@
 //Other than that slight tweaks will be made to make the code run more smoothly
 //and errors from the last version will be fixed.
 let attacksObj = {};
+let turns = 1;
 function randInt(low, high){
     return (Math.floor(Math.random() * high) + low);
 }
@@ -55,6 +56,7 @@ let view = {
         let mstrTele = document.getElementById("monsterTelegraph");
         mstrName.innerHTML = monster.monsterName;
         mstrHealth.innerHTML = "Health: " + monster.monsterHP + "/" + monster.mstrHPMax;
+        document.getElementById("mstrHPBar").style.width = (monster.monsterHP) + "%";
         mstrTele.innerHTML = monster.mstrTelegraph;
     }
 }
@@ -253,8 +255,10 @@ let upkeep = {
             }
             player.playerAttack = 0;
             player.playerBlock = 0;
+            turns++;
+            document.getElementById("errorReport").innerHTML = "TURN " + turns + "<br>"
+                + document.getElementById("errorReport").innerHTML;
             player.playerSP = player.plrSPMax;
-            document.getElementById("errorReport").innerHTML = "";
             view.updatePlayer();
             upkeep.monsterAction();
         }
@@ -265,8 +269,8 @@ let upkeep = {
         let actionChoice = 0;
         actionChoice = Math.floor(Math.random()*4);
         if(actionChoice === 0){
-            monster.monsterAttack += rollDice(1,10) + (monster.mstrStrength);
-            monster.monsterBlock += rollDice (1,4) + (monster.mstrEndurance);
+            monster.monsterAttack = rollDice(1,10) + (monster.mstrStrength);
+            monster.monsterBlock = rollDice (1,4) + (monster.mstrEndurance);
             monster.mstrTelegraph = "Minotaur is preparing to charge!";
         }else if (actionChoice === 1){
             monster.monsterAttack = rollDice(2, 12) + (monster.mstrStrength);
