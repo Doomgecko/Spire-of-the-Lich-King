@@ -4,6 +4,10 @@
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 10px;
 }
+
+body{
+    color: darkgray;
+}
 .col:nth-child(-n + 5) {
     grid-column: span 2;
 }
@@ -51,6 +55,7 @@
 #playerSP {
     background-color: orange;
     color: white;
+    text-wrap: none;
     height: 20px;
     width: 100%;
 }
@@ -68,7 +73,7 @@ button{
 
 body{
     background-image: url("The Spire.jpg");
-    font-family: "Times New Roman", "serif";
+    font-family: "Georgia", "serif";
     font-size: calc(4px + .5vw);
 }
 

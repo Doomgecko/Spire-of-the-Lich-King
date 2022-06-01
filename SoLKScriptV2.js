@@ -41,7 +41,7 @@ let view = {
     updatePlayer(){
         document.getElementById("playerName").innerHTML = player.playerName;
         document.getElementById("playerHP").innerHTML = "Health: " + player.playerHP + "/" + player.plrHPMax;
-        document.getElementById("playerHP").style.width = "" + player.playerHP/2;
+        document.getElementById("playerHP").style.width = (player.playerHP) + "%";
         document.getElementById("playerMP").innerHTML = "Mana: " + player.playerMP + "/" + player.plrMPMax;
         document.getElementById("playerSP").innerHTML = "Stamina: " + player.playerSP + "/" + player.plrSPMax;
         document.getElementById("playerDamage").innerHTML = "Damage <" + player.playerAttack + ">";
