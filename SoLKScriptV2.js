@@ -43,8 +43,9 @@ let view = {
         document.getElementById("playerHP").innerHTML = "Health: " + player.playerHP + "/" + player.plrHPMax;
         document.getElementById("healthBar").style.width = (player.playerHP) + "%";
         document.getElementById("playerMP").innerHTML = "Mana: " + player.playerMP + "/" + player.plrMPMax;
-        document.getElementById("playerMP").style.width = (player.playerMP*4) + "%";
+        document.getElementById("manaBar").style.width = (player.playerMP*5) + "%";
         document.getElementById("playerSP").innerHTML = "Stamina: " + player.playerSP + "/" + player.plrSPMax;
+        document.getElementById("staminaBar").style.width = (player.playerSP*20) + "%";
         document.getElementById("playerDamage").innerHTML = "Damage <" + player.playerAttack + ">";
         document.getElementById("playerBlock").innerHTML = "Defense (" + player.playerBlock + ")";
     },
@@ -111,10 +112,11 @@ let player = {
                 player.playerSP -= 2;
                 view.updatePlayer();
                 document.getElementById("errorReport").innerHTML = "You prepare an attack. (Damage +" +
-                    playerSlash + ")";
+                    playerSlash + ")" + "<br>" +  document.getElementById("errorReport").innerHTML;
 
             } else {
-                document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
+                document.getElementById("errorReport").innerHTML = "You don't have enough Stamina."
+                    + "<br>" +  document.getElementById("errorReport").innerHTML;
             }
 
     },
@@ -125,9 +127,10 @@ let player = {
             player.playerSP -= 3;
             view.updatePlayer();
             document.getElementById("errorReport").innerHTML = "You prepare a mighty strike (Damage +" +
-                playerCleave + ")";
+                playerCleave + ")" + "<br>" +  document.getElementById("errorReport").innerHTML;
         }else{
-            document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
+            document.getElementById("errorReport").innerHTML = "You don't have enough Stamina." +
+                "<br>" + document.getElementById("errorReport").innerHTML;
         }
     },
     defend(){
@@ -137,9 +140,10 @@ let player = {
             player.playerSP -= 3;
             view.updatePlayer();
             document.getElementById("errorReport").innerHTML = "You ready your shield. (Block +" +
-                playerDefend + ")";
+                playerDefend + ")" + "<br>" +  document.getElementById("errorReport").innerHTML;
         }else{
-            document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
+            document.getElementById("errorReport").innerHTML = "You don't have enough Stamina."
+                + "<br>" +  document.getElementById("errorReport").innerHTML;
         }
     },
     dodge(){
@@ -149,9 +153,10 @@ let player = {
             player.playerSP -= 2;
             view.updatePlayer();
             document.getElementById("errorReport").innerHTML = "You prepare to dodge. (Block +" +
-                playerDodge + ")";
+                playerDodge + ")" + "<br>" +  document.getElementById("errorReport").innerHTML;
         }else{
-            document.getElementById("errorReport").innerHTML = "You don't have enough Stamina.";
+            document.getElementById("errorReport").innerHTML = "You don't have enough Stamina."
+                + "<br>" +  document.getElementById("errorReport").innerHTML;
         }
     },
     fireball(){
@@ -164,9 +169,10 @@ let player = {
             player.playerMP -= 5;
             view.updatePlayer();
             document.getElementById("errorReport").innerHTML = "You begin channeling a fireball! (Damage +" +
-                playerFireball + ")";
+                playerFireball + ")" + "<br>" +  document.getElementById("errorReport").innerHTML;
         }else{
-            document.getElementById("errorReport").innerHTML = "You don't have enough resources.";
+            document.getElementById("errorReport").innerHTML = "You don't have enough resources."
+                + "<br>" +  document.getElementById("errorReport").innerHTML;
         }
     },
     lightningBolt(){
@@ -184,9 +190,11 @@ let player = {
             }
             player.playerAttack += bolt;
             view.updatePlayer();
-            document.getElementById("errorReport").innerHTML = "You channel a mighty bolt! (Damage +"+ bolt +")";
+            document.getElementById("errorReport").innerHTML = "You channel a mighty bolt! (Damage +"+ bolt +")"
+                + "<br>" +  document.getElementById("errorReport").innerHTML;
             }else{
-            document.getElementById("errorReport").innerHTML = "You don't have enough resources.";
+            document.getElementById("errorReport").innerHTML = "You don't have enough resources."
+                + "<br>" +  document.getElementById("errorReport").innerHTML;
         }
     },
     quickWard(){
@@ -196,9 +204,11 @@ let player = {
             player.playerMP -= 2;
             player.playerBlock += ward;
             view.updatePlayer();
-            document.getElementById("errorReport").innerHTML = "You project a magic ward. (+5 Block)";
+            document.getElementById("errorReport").innerHTML = "You project a magic ward. (+5 Block)" + "<br>"
+                + document.getElementById("errorReport").innerHTML;
         }else{
-            document.getElementById("errorReport").innerHTML = "You don't have enough resources.";
+            document.getElementById("errorReport").innerHTML = "You don't have enough resources."
+                + "<br>" +  document.getElementById("errorReport").innerHTML;
         }
     }
 }

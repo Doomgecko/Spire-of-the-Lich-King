@@ -44,20 +44,28 @@ body{
     width: 50%;
 }
 
-#playerMP{
+#manaBar{
     background-color: #2200ff;
     color: white;
     height: 20px;
     width: 100%;
 }
 
-#plrMaxMP{
-    color: grey;
-    height: 20px;
-    width: 40%
+#playerMP{
+    position: absolute;
 }
 
-#playerSP {
+#plrMaxMP{
+    background-color: grey;
+    height: 20px;
+    width: 40%;
+}
+
+#playerSP{
+    position: absolute;
+}
+
+#staminaBar {
     background-color: orange;
     color: white;
     text-wrap: none;
@@ -66,7 +74,7 @@ body{
 }
 
 #plrMaxSP{
-    color: grey;
+    background-color: grey;
     height: 20px;
     width: 50%
 }
