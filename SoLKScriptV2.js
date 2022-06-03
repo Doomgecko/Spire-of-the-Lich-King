@@ -124,7 +124,7 @@ let player = {
     },
     SPAttack(){
         if (player.playerSP >= 3) {
-            let playerCleave = rollDice(1, 12) + (player.plrStrength * 1.5);
+            let playerCleave = rollDice(1, 8) + (player.plrStrength * 1.5);
             player.playerAttack += playerCleave;
             player.playerSP -= 3;
             view.updatePlayer();
@@ -137,7 +137,7 @@ let player = {
     },
     defend(){
         if (player.playerSP >= 3) {
-            let playerDefend = rollDice(2,8) + (player.plrEndurance);
+            let playerDefend = rollDice(2,10) + (player.plrEndurance);
             player.playerBlock += playerDefend;
             player.playerSP -= 3;
             view.updatePlayer();
@@ -201,7 +201,7 @@ let player = {
     },
     quickWard(){
         if (player.playerSP >= 1 && player.playerMP >= 2) {
-            let ward = rollDice(1,6) + (player.plrWit);
+            let ward = rollDice(1,8) + (player.plrWit);
             player.playerSP -= 1;
             player.playerMP -= 2;
             player.playerBlock += ward;
@@ -221,7 +221,7 @@ let monster = {
     mstrHPMax: 100,
     monsterAttack: 20,
     monsterBlock: 10,
-    mstrStrength: 5,
+    mstrStrength: 10,
     mstrEndurance: 5,
     monsterActions: ["Attack", "SPAttack", "Defend", "Warcry"],
     mstrTelegraph: "Minotaur is ready to fight!"
@@ -242,6 +242,9 @@ let upkeep = {
         monster.monsterName = "Dead";
         monster.monsterHP = 0;
         monster.mstrTelegraph = "The Minotaur lies dead."
+        document.getElementById("endTurn").innerHTML="<div></div>";
+        document.getElementById("newGame").innerHTML = "<button id='newGame' type='button' " +
+            "onclick='document.location.reload();'>" + "New Game?</button>";
         view.updateMonster();},
     processTurn(){
         if (monster.monsterHP < 1){
@@ -269,21 +272,21 @@ let upkeep = {
         let actionChoice = 0;
         actionChoice = Math.floor(Math.random()*4);
         if(actionChoice === 0){
-            monster.monsterAttack = rollDice(1,10) + (monster.mstrStrength);
+            monster.monsterAttack = rollDice(1,8) + (monster.mstrStrength);
             monster.monsterBlock = rollDice (1,4) + (monster.mstrEndurance);
             monster.mstrTelegraph = "Minotaur is preparing to charge!";
         }else if (actionChoice === 1){
-            monster.monsterAttack = rollDice(2, 12) + (monster.mstrStrength);
+            monster.monsterAttack = rollDice(3, 8) + (monster.mstrStrength);
             monster.monsterBlock = 0;
             monster.mstrTelegraph = "Minotaur is readying a mighty strike!";
         }else if (actionChoice === 2){
-            monster.monsterAttack = rollDice(1,6);
+            monster.monsterAttack = rollDice(1,8);
             monster.monsterBlock = rollDice(1,12) + (Math.floor(monster.mstrEndurance * 1.5));
             monster.mstrTelegraph = "Minotaur is standing resolute!";
         }else if (actionChoice === 3){
             let brutal = Math.floor(Math.random()*2) + 1;
             if(brutal === 1) {
-                monster.monsterAttack = rollDice(3, 12);
+                monster.monsterAttack = rollDice(3, 12) + monster.mstrStrength;
                 monster.monsterBlock = 0;
                 monster.monsterHP -= rollDice(1,6);
                 monster.mstrTelegraph = "Minotaur is preparing a brutal attack!"

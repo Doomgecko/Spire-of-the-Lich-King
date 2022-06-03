@@ -121,6 +121,13 @@ body{
     color: red;
 
 }
+
+#newGame {
+    position: fixed;
+    bottom: 1vw;
+    left: 50%;
+    background-color: cadetblue;
+}
 h1 {
     font-size: calc(6px + 1vw);
 }
