@@ -6,6 +6,11 @@
 //and errors from the last version will be fixed.
 let attacksObj = {};
 let turns = 1;
+//document.getElementById("devButton").onclick = function(){
+// player.playerAttack = 1000;
+// view.updatePlayer();
+//}
+
 function randInt(low, high){
     return (Math.floor(Math.random() * high) + low);
 }
@@ -241,10 +246,19 @@ let upkeep = {
         document.getElementById("errorReport").innerHTML = "You have defeated the minotaur! Congrats!";
         monster.monsterName = "Dead";
         monster.monsterHP = 0;
-        monster.mstrTelegraph = "The Minotaur lies dead."
+        monster.mstrTelegraph = "The Minotaur lies dead.";
         document.getElementById("endTurn").innerHTML="<div></div>";
         document.getElementById("newGame").innerHTML = "<button id='newGame' type='button' " +
             "onclick='document.location.reload();'>" + "New Game?</button>";
+        document.getElementById("rewardScreen").style.display="block";
+        document.getElementsByClassName("closeRewards")[0].onclick = function(){
+            document.getElementById("rewardScreen").style.display="none";
+        }
+        window.onclick = function (event){
+            if(event.target === document.getElementById("rewardScreen")){
+                document.getElementById("rewardScreen").style.display = "none";
+            }
+        }
         view.updateMonster();},
     processTurn(){
         if (monster.monsterHP < 1){
