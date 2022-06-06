@@ -6,10 +6,10 @@
 //and errors from the last version will be fixed.
 let attacksObj = {};
 let turns = 1;
-//document.getElementById("devButton").onclick = function(){
-// player.playerAttack = 1000;
-// view.updatePlayer();
-//}
+document.getElementById("devButton").onclick = function(){
+player.playerAttack = 1000;
+view.updatePlayer();
+}
 
 function randInt(low, high){
     return (Math.floor(Math.random() * high) + low);
@@ -112,6 +112,9 @@ let player = {
     plrSpirit: 0,
     playerAttack: 0,
     playerBlock: 0,
+    gold: 10,
+    experience: 0,
+    expToLevel: 100,
     attack(){
             if (player.playerSP >= 2) {
                 let playerSlash = rollDice(1,6) + player.plrStrength;
@@ -229,7 +232,10 @@ let monster = {
     mstrStrength: 10,
     mstrEndurance: 5,
     monsterActions: ["Attack", "SPAttack", "Defend", "Warcry"],
-    mstrTelegraph: "Minotaur is ready to fight!"
+    mstrTelegraph: "Minotaur is ready to fight!",
+    goldDrop: rollDice(5,6),
+    expDrop: 15,
+    itemDrop: ["Leather Armor", "Minotaur's Axe"]
 
 }
 
@@ -259,6 +265,11 @@ let upkeep = {
                 document.getElementById("rewardScreen").style.display = "none";
             }
         }
+        document.getElementById("rewards").innerHTML = "<p> Gold: " + player.gold + "   (+" + monster.goldDrop + ")   " + (player.gold +monster.goldDrop) +
+            "<br>" + "Exp: " + player.experience + "   (+" + monster.expDrop + ")   " + (player.experience + monster.expDrop) + "/" + player.expToLevel + "<br><br>" +
+            "Loot: <br>" +
+            monster.itemDrop[0] + " (x1)<br>" +
+            monster.itemDrop[1] + " (x1)</p>";
         view.updateMonster();},
     processTurn(){
         if (monster.monsterHP < 1){
@@ -284,7 +295,7 @@ let upkeep = {
     },
     monsterAction(){
         let actionChoice = 0;
-        actionChoice = Math.floor(Math.random()*4);
+        actionChoice = Math.floor(Math.random()*5);
         if(actionChoice === 0){
             monster.monsterAttack = rollDice(1,8) + (monster.mstrStrength);
             monster.monsterBlock = rollDice (1,4) + (monster.mstrEndurance);
@@ -304,6 +315,17 @@ let upkeep = {
                 monster.monsterBlock = 0;
                 monster.monsterHP -= rollDice(1,6);
                 monster.mstrTelegraph = "Minotaur is preparing a brutal attack!"
+            }
+        }else if(actionChoice === 4){
+            let pumped = rollDice(1,6);
+            if (pumped <= 4){
+                monster.mstrStrength += 2;
+                monster.monsterBlock = rollDice(1,10)  + (monster.mstrEndurance);
+                monster.mstrTelegraph = "Minotaur is pumping itself up!"
+            }else{
+                monster.monsterAttack = rollDice(1,10) + (monster.mstrStrength);
+                monster.monsterHP -= rollDice(1,6) + (monster.mstrStrength);
+                monster.mstrTelegraph = "Minotaur is enraged!"
             }
         }
         view.updateMonster();
