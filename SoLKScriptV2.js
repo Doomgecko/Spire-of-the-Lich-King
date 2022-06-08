@@ -56,13 +56,10 @@ let view = {
         document.getElementById("playerBlock").innerHTML = "Defense (" + player.playerBlock + ")";
     },
     updateMonster(){
-        let mstrName = document.getElementById("monsterName");
-        let mstrHealth = document.getElementById("monsterHP");
-        let mstrTele = document.getElementById("monsterTelegraph");
-        mstrName.innerHTML = monster.monsterName;
-        mstrHealth.innerHTML = "Health: " + monster.monsterHP + "/" + monster.mstrHPMax;
+        document.getElementById("monsterName").innerHTML = monster.monsterName;
+        document.getElementById("monsterHP").innerHTML = "Health: " + monster.monsterHP + "/" + monster.mstrHPMax;
         document.getElementById("mstrHPBar").style.width = (monster.monsterHP) + "%";
-        mstrTele.innerHTML = monster.mstrTelegraph;
+        document.getElementById("monsterTelegraph").innerHTML = monster.mstrTelegraph;
     }
 }
 
@@ -113,7 +110,7 @@ let player = {
     playerAttack: 0,
     playerBlock: 0,
     gold: 10,
-    experience: 0,
+    experience: 10,
     expToLevel: 100,
     attack(){
             if (player.playerSP >= 2) {
@@ -265,8 +262,8 @@ let upkeep = {
                 document.getElementById("rewardScreen").style.display = "none";
             }
         }
-        document.getElementById("rewards").innerHTML = "<p> Gold: " + player.gold + "   (+" + monster.goldDrop + ")   " + (player.gold +monster.goldDrop) +
-            "<br>" + "Exp: " + player.experience + "   (+" + monster.expDrop + ")   " + (player.experience + monster.expDrop) + "/" + player.expToLevel + "<br><br>" +
+        document.getElementById("rewards").innerHTML = "<p> Gold: " + player.gold + "&#160;&#160;&#160;(+" + monster.goldDrop + ")&#160;&#160;&#160;" + (player.gold +monster.goldDrop) +
+            "<br>" + "Exp:&#160;&#160;&#160;" + player.experience + "&#160;&#160;&#160;(+" + monster.expDrop + ")&#160;&#160;&#160;" + (player.experience + monster.expDrop) + "/" + player.expToLevel + "<br><br>" +
             "Loot: <br>" +
             monster.itemDrop[0] + " (x1)<br>" +
             monster.itemDrop[1] + " (x1)</p>";
