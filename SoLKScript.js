@@ -6,10 +6,10 @@
 //and errors from the last version will be fixed.
 let attacksObj = {};
 let turns = 1;
-document.getElementById("devButton").onclick = function(){
-player.playerAttack = 1000;
-view.updatePlayer();
-}
+// document.getElementById("devButton").onclick = function(){
+// player.playerAttack = 1000;
+// view.updatePlayer();
+// }
 
 function randInt(low, high){
     return (Math.floor(Math.random() * high) + low);
@@ -32,7 +32,7 @@ let setup = {
                 attacksObj = JSON.parse(this.responseText);
             }
         }
-        attackData.open("GET", "attackStats.json",false);
+        attackData.open("GET", "actionList.json",false);
         attackData.send();
     },
     setupMonster(){
@@ -233,7 +233,6 @@ let monster = {
     goldDrop: rollDice(5,6),
     expDrop: 15,
     itemDrop: ["Leather Armor", "Minotaur's Axe"]
-
 }
 
 let upkeep = {
